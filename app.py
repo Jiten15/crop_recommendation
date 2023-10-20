@@ -6,7 +6,7 @@ import pickle
 import warnings
 
 
-st.beta_set_page_config(page_title="Crop Recommender", page_icon="🌿", layout='centered', initial_sidebar_state="collapsed")
+st.set_page_config(page_title="Crop Recommender", page_icon="🌿", layout='centered', initial_sidebar_state="collapsed")
 
 def load_model(modelfile):
 	loaded_model = pickle.load(open(modelfile, 'rb'))
@@ -21,18 +21,20 @@ def main():
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
-    col1,col2  = st.beta_columns([2,2])
+    col1,col2  = st.columns([2,2])
     
     with col1: 
-        with st.beta_expander(" ℹ️ Information", expanded=True):
+        with st.expander(" Expert System: Crop-Recommendation", expanded=True):
+            st.image("es.png", caption="Expert System", use_column_width=True)
             st.write("""
-            Crop recommendation is one of the most important aspects of precision agriculture. Crop recommendations are based on a number of factors. Precision agriculture seeks to define these criteria on a site-by-site basis in order to address crop selection issues. While the "site-specific" methodology has improved performance, there is still a need to monitor the systems' outcomes.Precision agriculture systems aren't all created equal. 
-            However, in agriculture, it is critical that the recommendations made are correct and precise, as errors can result in significant material and capital loss.
+            Here our "Knowledge Base" is prepared with "Crop_Recommendation.csv" file. This data has been collected from "Farms" and "Human Experts".
+            An "Inference Engine" is been prepared using Machine learning and some other technologies. This Interface is developed with "Streamlit".
+            Now Any Non-Expert can interact with Expert System and can get the suggestions like getting suggesions from a Human Expert.
 
             """)
         '''
         ## How does it work ❓ 
-        Complete all the parameters and the machine learning model will predict the most suitable crops to grow in a particular farm based on various parameters
+        Fill the details shown then Expert 
         '''
 
 
@@ -49,17 +51,17 @@ def main():
         feature_list = [N, P, K, temp, humidity, ph, rainfall]
         single_pred = np.array(feature_list).reshape(1,-1)
         
-        if st.button('Predict'):
+        if st.button('Give me Recommendation'):
 
             loaded_model = load_model('model.pkl')
             prediction = loaded_model.predict(single_pred)
             col1.write('''
 		    ## Results 🔍 
 		    ''')
-            col1.success(f"{prediction.item().title()} are recommended by the A.I for your farm.")
+            col1.success(f"{prediction.item().title()} will be suitable for your farm.")
       #code for html ☘️ 🌾 🌳 👨‍🌾  🍃
 
-    st.warning("Note: This A.I application is for educational/demo purposes only and cannot be relied upon. Check the source code [here](https://github.com/gabbygab1233/Crop-Recommendation)")
+    st.warning("Note: This A.I application is for educational purposes only. Check the source code [here](https://github.com/Jiten15/crop_recommendation)")
     hide_menu_style = """
     <style>
     #MainMenu {visibility: hidden;}

@@ -1,5 +1,6 @@
 import pandas as pd
-import pandas_profiling as pp
+# import pandas_profiling as pp
+import ydata_profiling as pp
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -185,21 +186,21 @@ def classification_metrics(model, conf_matrix):
 df = pd.read_csv('Crop_recommendation.csv')
 
 # Remove Outliers
-Q1 = df.quantile(0.25)
-Q3 = df.quantile(0.75)
-IQR = Q3 - Q1
-df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
+# Q1 = df.quantile(0.25)
+# Q3 = df.quantile(0.75)
+# IQR = Q3 - Q1
+# df_out = df[~((df < (Q1 - 1.5 * IQR)) |(df > (Q3 + 1.5 * IQR))).any(axis=1)]
 
 # Split Data to Training and Validation set
 target ='label'
-X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
 
+X_train, X_test, y_train, y_test = read_in_and_split_data(df, target)
+# print(len(X_train[1]))
 # Train model
 pipeline = make_pipeline(StandardScaler(),  GaussianNB())
 model = pipeline.fit(X_train, y_train)
+# save model
+save_model(model, 'model.pkl')
 y_pred = model.predict(X_test)
 conf_matrix = confusion_matrix(y_test,y_pred)
 classification_metrics(pipeline, conf_matrix)
-
-# save model
-save_model(model, 'model.pkl')
