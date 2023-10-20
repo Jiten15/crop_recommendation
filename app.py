@@ -34,16 +34,16 @@ def main():
             """)
         '''
         ## How does it work ❓ 
-        Fill the details shown then Expert 
+        Fill the details shown then Expert System will give you a crop recommendation.  
         '''
 
 
     with col2:
         st.subheader(" Find out the most suitable crop to grow in your farm 👨‍🌾")
-        N = st.number_input("Nitrogen", 1,10000)
-        P = st.number_input("Phosporus", 1,10000)
-        K = st.number_input("Potassium", 1,10000)
-        temp = st.number_input("Temperature",0.0,100000.0)
+        N = st.number_input("Nitrogen ratio to soil", 1,10000)
+        P = st.number_input("Phosporus ratio to soil", 1,10000)
+        K = st.number_input("Potassium ratio to soil", 1,10000)
+        temp = st.number_input("Temperature degree C",0.0,100000.0)
         humidity = st.number_input("Humidity in %", 0.0,100000.0)
         ph = st.number_input("Ph", 0.0,100000.0)
         rainfall = st.number_input("Rainfall in mm",0.0,100000.0)
