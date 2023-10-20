@@ -31,5 +31,5 @@ This dataset was build by augmenting datasets of rainfall, climate and fertilize
 
  
 # Demo
-Live Demo: 
+Live Demo: https://croprecommendation-zzddfmrtbcfmmd8b5yg6fp.streamlit.app/
 
